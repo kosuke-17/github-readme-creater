@@ -6,10 +6,10 @@ import Typography from '@mui/material/Typography'
 
 import Divider from '@/components/parts/Divider'
 
-type Props = { skillIconsUrl: string }
+type Props = { skillIconsUrl: string; title?: string; subtitle?: string }
 
 // TODO:レスポンシブ対応する
-const SkillIconsPreview = ({ skillIconsUrl }: Props) => {
+const SkillIconsPreview = ({ skillIconsUrl, title, subtitle }: Props) => {
   return (
     <Box sx={{ maxWidth: '50%', minWidth: '40%' }}>
       <Typography
@@ -31,13 +31,13 @@ const SkillIconsPreview = ({ skillIconsUrl }: Props) => {
         <Box sx={{ flex: 1 }}>
           {/* react-markdownに対応する */}
           <Typography variant='h5' sx={{ color: 'common.white' }}>
-            Skills
+            {title ? title : 'Skills'}
           </Typography>
 
           <Divider />
 
           <Typography variant='body2' sx={{ color: 'common.white' }}>
-            Subtitles
+            {subtitle ? subtitle : 'Subtitle'}
           </Typography>
 
           <Box sx={{ mt: 1 }}>

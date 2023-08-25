@@ -1,5 +1,6 @@
 import Stack from '@mui/material/Stack'
 import { styled } from '@mui/material/styles'
+import type { ChangeEventHandler } from 'react'
 import { useState } from 'react'
 
 import SkillIconsPreview from '@/components/organisms/Skills/SkillIconsPreview'
@@ -11,6 +12,19 @@ const Skills = () => {
     perline: 8,
     i: ['ts', 'js', 'html'],
   })
+  const [title, setTitle] = useState<string | undefined>(undefined)
+  const [subtitle, setSubitle] = useState<string | undefined>(undefined)
+
+  const onChangeTitle = (value: string | undefined) => {
+    if (!value) return
+
+    setTitle(value)
+  }
+  const onChangeSubtitle = (value: string | undefined) => {
+    if (!value) return
+
+    setSubitle(value)
+  }
 
   const skillIconsUrl = `https://skillicons.dev/icons?theme=${
     query.theme
@@ -18,9 +32,18 @@ const Skills = () => {
 
   return (
     <SkillsLayout direction='row'>
-      <SkillIconsSelect />
+      <SkillIconsSelect
+        title={title}
+        subtitle={subtitle}
+        onChangeTitle={onChangeTitle}
+        onChangeSubtitle={onChangeSubtitle}
+      />
 
-      <SkillIconsPreview skillIconsUrl={skillIconsUrl} />
+      <SkillIconsPreview
+        skillIconsUrl={skillIconsUrl}
+        title={title}
+        subtitle={subtitle}
+      />
     </SkillsLayout>
   )
 }

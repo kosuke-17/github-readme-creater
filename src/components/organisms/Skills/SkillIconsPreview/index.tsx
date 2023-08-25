@@ -1,14 +1,23 @@
+'use client'
+
 import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
 
 import Divider from '@/components/parts/Divider'
 
+type Props = { skillIconsUrl: string }
+
 // TODO:レスポンシブ対応する
-const SkillIconsPreview = () => {
+const SkillIconsPreview = ({ skillIconsUrl }: Props) => {
   return (
-    <Box sx={{ width: '40%' }}>
-      <Typography variant='h4'>プレビュー</Typography>
+    <Box sx={{ maxWidth: '50%', minWidth: '40%' }}>
+      <Typography
+        variant='h4'
+        sx={{ color: 'primary.main', fontWeight: 'bold' }}
+      >
+        プレビュー
+      </Typography>
       <Paper
         elevation={2}
         sx={{
@@ -16,10 +25,10 @@ const SkillIconsPreview = () => {
           py: 4,
           px: 8,
           display: 'flex',
-          justifyContent: 'center',
+          justifyContent: 'start',
         }}
       >
-        <Box>
+        <Box sx={{ flex: 1 }}>
           {/* react-markdownに対応する */}
           <Typography variant='h5' sx={{ color: 'common.white' }}>
             Skills
@@ -34,10 +43,7 @@ const SkillIconsPreview = () => {
           <Box sx={{ mt: 1 }}>
             {/* TODO: next/imageに置き換え */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              alt='my skills'
-              src='https://skillicons.dev/icons?theme=light&perline=8&i=ts,js,html,css,nodejs,react,nextjs,nestjs,redux,prisma,aws,materialui,jest,git,github,figma,vscode'
-            />
+            <img alt='my skills' src={skillIconsUrl} />
           </Box>
         </Box>
       </Paper>

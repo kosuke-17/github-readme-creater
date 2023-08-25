@@ -13,19 +13,27 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
           node-version-file: '.node-version'
-      - run: yarn install
-      - run: yarn run check-lint
+      - name: Install Dependencies
+        run: yarn install
+      - name: Run Lint Check
+        run: yarn run check-lint
 
-  typecheck:
+   typecheck:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
           node-version-file: '.node-version'
-      - run: yarn install
-      - run: yarn run check-types
+      - name: Install Dependencies
+        run: yarn install
+      - name: Run Type Check
+        run: yarn run check-types

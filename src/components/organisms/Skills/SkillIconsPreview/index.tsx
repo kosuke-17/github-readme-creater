@@ -43,7 +43,7 @@ const SkillIconsPreview = ({ skillIconsUrl, title, subtitle }: Props) => {
           <Box sx={{ mt: 1 }}>
             {/* TODO: next/imageに置き換え */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img alt='my skills' src={skillIconsUrl} />
+            {/* <img alt='my skills' src={skillIconsUrl} /> */}
           </Box>
         </Box>
       </Paper>

@@ -5,6 +5,7 @@ import Tab from '@mui/material/Tab'
 import Tabs from '@mui/material/Tabs'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
+import type { SyntheticEvent } from 'react'
 import { useState } from 'react'
 
 type Props = {
@@ -19,15 +20,26 @@ const SkillIconsSelect = (props: Props) => {
 
   const [value, setValue] = useState(0)
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleChange = (_: SyntheticEvent, newValue: number) => {
     setValue(newValue)
   }
+
+  const tabs = [
+    { label: 'プログラミング言語', value: 0 },
+    { label: 'フロントエンド', value: 1 },
+    { label: 'バックエンド', value: 2 },
+    { label: 'DB', value: 3 },
+    { label: 'その他', value: 4 },
+  ]
   return (
     <Box sx={{ width: '50%', px: 2 }}>
       <Box sx={{ mb: 1 }}>
         <TextField
           label='Skills'
           variant='outlined'
+          InputLabelProps={{
+            shrink: true,
+          }}
           onChange={(e) => onChangeTitle(e.target.value)}
           value={title}
         />
@@ -36,6 +48,9 @@ const SkillIconsSelect = (props: Props) => {
         <TextField
           multiline
           label='Subtitle'
+          InputLabelProps={{
+            shrink: true,
+          }}
           variant='outlined'
           onChange={(e) => onChangeSubtitle(e.target.value)}
           value={subtitle}
@@ -49,11 +64,9 @@ const SkillIconsSelect = (props: Props) => {
           onChange={handleChange}
           aria-label='basic tabs example'
         >
-          <Tab label='プログラミング言語' value={0} />
-          <Tab label='フロントエンド' value={1} />
-          <Tab label='バックエンド' value={2} />
-          <Tab label='DB' value={3} />
-          <Tab label='その他' value={4} />
+          {tabs.map((t) => (
+            <Tab key={t.label} label={t.label} value={t.value} />
+          ))}
         </Tabs>
         <CustomTabPanel value={value} index={0}>
           Ruby,Python,Javascript,Typescript
@@ -91,8 +104,8 @@ function CustomTabPanel(props: TabPanelProps) {
     <div
       role='tabpanel'
       hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
+      id={`panel-${index}`}
+      aria-labelledby={`panel-${index}`}
       {...other}
     >
       {value === index && (

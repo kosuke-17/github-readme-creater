@@ -1,5 +1,10 @@
+'use client'
+
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
+import Checkbox from '@mui/material/Checkbox'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import FormGroup from '@mui/material/FormGroup'
 import Paper from '@mui/material/Paper'
 import Tab from '@mui/material/Tab'
 import Tabs from '@mui/material/Tabs'
@@ -31,6 +36,7 @@ const SkillIconsSelect = (props: Props) => {
     { label: 'DB', value: 3 },
     { label: 'その他', value: 4 },
   ]
+
   return (
     <Box sx={{ width: '50%', px: 2 }}>
       <Box sx={{ mb: 1 }}>
@@ -69,7 +75,7 @@ const SkillIconsSelect = (props: Props) => {
           ))}
         </Tabs>
         <CustomTabPanel value={value} index={0}>
-          Ruby,Python,Javascript,Typescript
+          <CustomFormGroup />
         </CustomTabPanel>
         <CustomTabPanel value={value} index={1}>
           Next.js,React
@@ -108,11 +114,27 @@ function CustomTabPanel(props: TabPanelProps) {
       aria-labelledby={`panel-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
+      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
     </div>
+  )
+}
+
+const CustomFormGroup = () => {
+  const programmingSkills = [
+    { label: 'TypeScript', value: 'ts' },
+    { label: 'Javascript', value: 'js' },
+    { label: 'Python', value: 'py' },
+    { label: 'Java', value: 'java' },
+  ]
+  return (
+    <FormGroup>
+      {programmingSkills.map((ps) => (
+        <FormControlLabel
+          control={<Checkbox />}
+          key={ps.label}
+          label={ps.label}
+        />
+      ))}
+    </FormGroup>
   )
 }

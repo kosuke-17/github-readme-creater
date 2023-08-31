@@ -9,33 +9,69 @@ import Paper from '@mui/material/Paper'
 import Tab from '@mui/material/Tab'
 import Tabs from '@mui/material/Tabs'
 import TextField from '@mui/material/TextField'
-import Typography from '@mui/material/Typography'
-import type { SyntheticEvent } from 'react'
-import { useState } from 'react'
+import type { Dispatch, SetStateAction, SyntheticEvent } from 'react'
+import { Fragment, useEffect, useState } from 'react'
+
+import type { SkillQuery } from '@/components/templates/Skills'
 
 type Props = {
   title?: string
   onChangeTitle: (value: string | undefined) => void
   subtitle?: string
   onChangeSubtitle: (value: string | undefined) => void
+  setQuery: Dispatch<SetStateAction<SkillQuery>>
 }
 
+type Skill = { label: string; value: string }
+type SelectSkill = { skill: Skill; checked: boolean }
+
+const tabs = [
+  { label: 'プログラミング言語', value: 0 },
+  { label: 'フロントエンド', value: 1 },
+  { label: 'バックエンド', value: 2 },
+  { label: 'DB', value: 3 },
+  { label: 'その他', value: 4 },
+]
+
+const programmingSkills = [
+  { label: 'TypeScript', value: 'ts' },
+  { label: 'Javascript', value: 'js' },
+  { label: 'Python', value: 'py' },
+  { label: 'Java', value: 'java' },
+  { label: 'PHP', value: 'php' },
+]
+
 const SkillIconsSelect = (props: Props) => {
-  const { title, subtitle, onChangeTitle, onChangeSubtitle } = props
+  const { title, subtitle, onChangeTitle, onChangeSubtitle, setQuery } = props
 
   const [value, setValue] = useState(0)
+
+  const [selectedSkills, setSelectedSkills] = useState<Skill[]>([])
+
+  const selectProgramngSkills = (skill: Skill) => {
+    setSelectedSkills((prev) => [...prev, skill])
+  }
+  const unselectProgramingSkill = (skill: Skill) => {
+    setSelectedSkills((prev) => prev.filter((p) => p.label !== skill.label))
+  }
+
+  useEffect(() => {
+    const selectedSkillValues = selectedSkills.map((s) => s.value)
+    setQuery((prev) => ({ ...prev, i: selectedSkillValues }))
+  }, [selectedSkills, setQuery])
+
+  const onOchangeProgrammingSkills = (props: SelectSkill) => {
+    const { skill, checked } = props
+    if (checked) {
+      selectProgramngSkills(skill)
+    } else {
+      unselectProgramingSkill(skill)
+    }
+  }
 
   const handleChange = (_: SyntheticEvent, newValue: number) => {
     setValue(newValue)
   }
-
-  const tabs = [
-    { label: 'プログラミング言語', value: 0 },
-    { label: 'フロントエンド', value: 1 },
-    { label: 'バックエンド', value: 2 },
-    { label: 'DB', value: 3 },
-    { label: 'その他', value: 4 },
-  ]
 
   return (
     <Box sx={{ width: '50%', px: 2 }}>
@@ -75,22 +111,41 @@ const SkillIconsSelect = (props: Props) => {
           ))}
         </Tabs>
         <CustomTabPanel value={value} index={0}>
-          <CustomFormGroup />
+          <CustomFormGroup
+            skills={programmingSkills}
+            onChange={onOchangeProgrammingSkills}
+          />
         </CustomTabPanel>
-        <CustomTabPanel value={value} index={1}>
-          Next.js,React
+        {/* TODO */}
+        {/* <CustomTabPanel value={value} index={1}>
+          <CustomFormGroup
+            skills={frontendSkills}
+            onChange={onSelectFrontendSkills}
+          />
         </CustomTabPanel>
         <CustomTabPanel value={value} index={2}>
-          Ruby onRails,FastApi,Django
+          <CustomFormGroup
+            skills={backendSkills}
+            onChange={onSelectBackendSkills}
+          />
         </CustomTabPanel>
         <CustomTabPanel value={value} index={3}>
-          MySQL,Postgres,MongoDB
+          <CustomFormGroup skills={DBSkills} onChange={onSelectDBSkills} />
         </CustomTabPanel>
         <CustomTabPanel value={value} index={4}>
-          Git,Github
-        </CustomTabPanel>
+          <CustomFormGroup
+            skills={otherSkills}
+            onChange={onSelectOtherSkills}
+          />
+        </CustomTabPanel> */}
       </Paper>
       <Button variant='contained'>README 作成</Button>
+      <Box>
+        1:
+        {selectedSkills.map((s) => (
+          <Fragment key={s.label}>{s.label}</Fragment>
+        ))}
+      </Box>
     </Box>
   )
 }
@@ -119,20 +174,20 @@ function CustomTabPanel(props: TabPanelProps) {
   )
 }
 
-const CustomFormGroup = () => {
-  const programmingSkills = [
-    { label: 'TypeScript', value: 'ts' },
-    { label: 'Javascript', value: 'js' },
-    { label: 'Python', value: 'py' },
-    { label: 'Java', value: 'java' },
-  ]
+const CustomFormGroup = (props: {
+  skills: Skill[]
+  onChange: (props: SelectSkill) => void
+}) => {
+  const { skills, onChange } = props
   return (
     <FormGroup>
-      {programmingSkills.map((ps) => (
+      {skills.map((skill) => (
         <FormControlLabel
           control={<Checkbox />}
-          key={ps.label}
-          label={ps.label}
+          key={skill.label}
+          label={skill.label}
+          value={skill.value}
+          onChange={(_, checked) => onChange({ skill, checked })}
         />
       ))}
     </FormGroup>

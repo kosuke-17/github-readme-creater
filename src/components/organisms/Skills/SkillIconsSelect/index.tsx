@@ -10,7 +10,7 @@ import Tab from '@mui/material/Tab'
 import Tabs from '@mui/material/Tabs'
 import TextField from '@mui/material/TextField'
 import type { Dispatch, SetStateAction, SyntheticEvent } from 'react'
-import { Fragment, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import type { SkillQuery } from '@/components/templates/Skills'
 
@@ -140,12 +140,6 @@ const SkillIconsSelect = (props: Props) => {
         </CustomTabPanel> */}
       </Paper>
       <Button variant='contained'>README 作成</Button>
-      <Box>
-        1:
-        {selectedSkills.map((s) => (
-          <Fragment key={s.label}>{s.label}</Fragment>
-        ))}
-      </Box>
     </Box>
   )
 }

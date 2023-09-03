@@ -1,7 +1,6 @@
 'use client'
 
 import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
 import Checkbox from '@mui/material/Checkbox'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import FormGroup from '@mui/material/FormGroup'
@@ -57,7 +56,7 @@ const SkillIconsSelect = (props: Props) => {
 
   useEffect(() => {
     const selectedSkillValues = selectedSkills.map((s) => s.value)
-    setQuery((prev) => ({ ...prev, i: selectedSkillValues }))
+    setQuery((prev) => ({ ...prev, icons: selectedSkillValues }))
   }, [selectedSkills, setQuery])
 
   const onOchangeProgrammingSkills = (props: SelectSkill) => {
@@ -139,7 +138,6 @@ const SkillIconsSelect = (props: Props) => {
           />
         </CustomTabPanel> */}
       </Paper>
-      <Button variant='contained'>README 作成</Button>
     </Box>
   )
 }

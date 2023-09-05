@@ -3,7 +3,7 @@
 import Box from '@mui/material/Box'
 import Checkbox from '@mui/material/Checkbox'
 import FormControlLabel from '@mui/material/FormControlLabel'
-import FormGroup from '@mui/material/FormGroup'
+import Grid from '@mui/material/Grid'
 import Paper from '@mui/material/Paper'
 import Tab from '@mui/material/Tab'
 import Tabs from '@mui/material/Tabs'
@@ -71,6 +71,14 @@ const SkillIconsSelect = (props: Props) => {
     setValue(newValue)
   }
 
+  const panels = [
+    { skills: programmingSkills },
+    { skills: frontendSkills },
+    { skills: backendSkills },
+    { skills: DBSkills },
+    { skills: otherSkills },
+  ]
+
   return (
     <Box sx={{ width: '40%', px: 2 }}>
       <Box sx={{ mb: 1 }}>
@@ -108,31 +116,14 @@ const SkillIconsSelect = (props: Props) => {
             <Tab key={t.label} label={t.label} value={t.value} />
           ))}
         </Tabs>
-        <CustomTabPanel value={value} index={0}>
-          <CustomFormGroup
-            skills={programmingSkills}
-            onChange={onOchangeMySkills}
-          />
-        </CustomTabPanel>
-        {/* TODO */}
-        <CustomTabPanel value={value} index={1}>
-          <CustomFormGroup
-            skills={frontendSkills}
-            onChange={onOchangeMySkills}
-          />
-        </CustomTabPanel>
-        <CustomTabPanel value={value} index={2}>
-          <CustomFormGroup
-            skills={backendSkills}
-            onChange={onOchangeMySkills}
-          />
-        </CustomTabPanel>
-        <CustomTabPanel value={value} index={3}>
-          <CustomFormGroup skills={DBSkills} onChange={onOchangeMySkills} />
-        </CustomTabPanel>
-        <CustomTabPanel value={value} index={4}>
-          <CustomFormGroup skills={otherSkills} onChange={onOchangeMySkills} />
-        </CustomTabPanel>
+
+        {panels.map(({ skills }, i) => {
+          return (
+            <CustomTabPanel key={i} value={value} index={i}>
+              <SkilLabels skills={skills} onChange={onOchangeMySkills} />
+            </CustomTabPanel>
+          )
+        })}
       </Paper>
     </Box>
   )
@@ -162,13 +153,13 @@ function CustomTabPanel(props: TabPanelProps) {
   )
 }
 
-const CustomFormGroup = (props: {
+const SkilLabels = (props: {
   skills: Skill[]
   onChange: (props: SelectSkill) => void
 }) => {
   const { skills, onChange } = props
   return (
-    <FormGroup>
+    <Grid container direction='row' spacing={2}>
       {skills.map((skill) => (
         <FormControlLabel
           control={<Checkbox />}
@@ -178,6 +169,6 @@ const CustomFormGroup = (props: {
           onChange={(_, checked) => onChange({ skill, checked })}
         />
       ))}
-    </FormGroup>
+    </Grid>
   )
 }

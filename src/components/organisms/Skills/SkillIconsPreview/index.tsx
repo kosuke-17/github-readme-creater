@@ -21,7 +21,7 @@ const SkillIconsPreview = ({ skillIconsUrl, title, subtitle }: Props) => {
   }
 
   return (
-    <Box sx={{ maxWidth: '60%', minWidth: '50%' }}>
+    <Box sx={{ width: '50%' }}>
       <Stack direction='row' spacing={1}>
         <Typography
           variant='h4'
@@ -29,7 +29,6 @@ const SkillIconsPreview = ({ skillIconsUrl, title, subtitle }: Props) => {
         >
           プレビュー
         </Typography>
-
         <FormControlLabel
           control={<Switch onChange={onShowCode} />}
           label='コードを見る'
@@ -43,7 +42,7 @@ const SkillIconsPreview = ({ skillIconsUrl, title, subtitle }: Props) => {
           px: 4,
           display: 'flex',
           justifyContent: 'start',
-          width: '100%',
+          minHeight: '200px',
         }}
       >
         {showCode ? (
@@ -92,7 +91,7 @@ const SkillCodePreview = ({
   skillIconsUrl: string
 }) => {
   return (
-    <code style={{ color: 'white' }}>
+    <code style={{ color: 'white', wordBreak: 'break-all' }}>
       以下をコピペしてください
       <br />
       ---------------------------

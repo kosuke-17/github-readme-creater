@@ -1,9 +1,6 @@
 'use client'
 
 import Box from '@mui/material/Box'
-import Checkbox from '@mui/material/Checkbox'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import Grid from '@mui/material/Grid'
 import Paper from '@mui/material/Paper'
 import Tab from '@mui/material/Tab'
 import Tabs from '@mui/material/Tabs'
@@ -11,6 +8,8 @@ import TextField from '@mui/material/TextField'
 import type { Dispatch, SetStateAction, SyntheticEvent } from 'react'
 import { useEffect, useState } from 'react'
 
+import type { Item, SelectItem } from '@/components/parts/CheckBoxes'
+import CheckBoxes from '@/components/parts/CheckBoxes'
 import type { SkillQuery } from '@/components/templates/Skills'
 import {
   backendSkills,
@@ -28,8 +27,7 @@ type Props = {
   setQuery: Dispatch<SetStateAction<SkillQuery>>
 }
 
-type Skill = { label: string; value: string }
-type SelectSkill = { skill: Skill; checked: boolean }
+type Skill = Item
 
 const tabs = [
   { label: 'プログラミング言語', value: 0 },
@@ -58,12 +56,12 @@ const SkillIconsSelect = (props: Props) => {
     setQuery((prev) => ({ ...prev, icons: selectedSkillValues }))
   }, [selectedSkills, setQuery])
 
-  const onOchangeMySkills = (props: SelectSkill) => {
-    const { skill, checked } = props
+  const onOchangeMySkills = (props: SelectItem) => {
+    const { item, checked } = props
     if (checked) {
-      selectProgramngSkills(skill)
+      selectProgramngSkills(item)
     } else {
-      unselectProgramingSkill(skill)
+      unselectProgramingSkill(item)
     }
   }
 
@@ -120,7 +118,7 @@ const SkillIconsSelect = (props: Props) => {
         {panels.map(({ skills }, i) => {
           return (
             <CustomTabPanel key={i} value={value} index={i}>
-              <SkilLabels skills={skills} onChange={onOchangeMySkills} />
+              <CheckBoxes items={skills} onChange={onOchangeMySkills} />
             </CustomTabPanel>
           )
         })}
@@ -150,25 +148,5 @@ function CustomTabPanel(props: TabPanelProps) {
     >
       {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
     </div>
-  )
-}
-
-const SkilLabels = (props: {
-  skills: Skill[]
-  onChange: (props: SelectSkill) => void
-}) => {
-  const { skills, onChange } = props
-  return (
-    <Grid container direction='row' spacing={2}>
-      {skills.map((skill) => (
-        <FormControlLabel
-          control={<Checkbox />}
-          key={skill.label}
-          label={skill.label}
-          value={skill.value}
-          onChange={(_, checked) => onChange({ skill, checked })}
-        />
-      ))}
-    </Grid>
   )
 }

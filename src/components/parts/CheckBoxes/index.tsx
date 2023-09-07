@@ -13,7 +13,12 @@ type CheckBoxesProps = {
 const CheckBoxes = (props: CheckBoxesProps) => {
   const { items, onChange } = props
   return (
-    <Grid container direction='row' spacing={2}>
+    <Grid
+      container
+      direction='row'
+      spacing={2}
+      sx={{ '.MuiGrid-item': { pt: 0 } }}
+    >
       {items.map((item) => (
         <Grid item key={item.label} xs={3}>
           <FormControlLabel

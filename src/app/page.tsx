@@ -3,9 +3,9 @@
 import Box from '@mui/material/Box'
 
 import Header from '@/components/organisms/Header'
-import Stats from '@/components/organisms/Stats'
 import Divider from '@/components/parts/Divider'
 import Skills from '@/components/templates/Skills'
+import Stats from '@/components/templates/Stats'
 
 export default function Home() {
   return (

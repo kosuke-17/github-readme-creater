@@ -1,6 +1,8 @@
+import Box from '@mui/material/Box'
+import Paper from '@mui/material/Paper'
 import Stack from '@mui/material/Stack'
-import { styled } from '@mui/material/styles'
-import { Fragment, useState } from 'react'
+import Typography from '@mui/material/Typography'
+import { useState } from 'react'
 
 import SkillIconsPreview from '@/components/organisms/Skills/SkillIconsPreview'
 import SkillIconsSelect from '@/components/organisms/Skills/SkillIconsSelect'
@@ -38,31 +40,36 @@ const Skills = () => {
     : ''
 
   return (
-    <Fragment>
-      <SkillsLayout direction='row'>
-        <SkillIconsSelect
-          title={title}
-          subtitle={subtitle}
-          onChangeTitle={onChangeTitle}
-          onChangeSubtitle={onChangeSubtitle}
-          setQuery={setQuery}
-        />
+    <Box sx={{ display: 'flex', justifyContent: 'center', m: 1 }}>
+      <Paper
+        elevation={3}
+        sx={{
+          width: '90%',
+          px: 2,
+          py: 3,
+        }}
+      >
+        <Typography variant='h4'>🍃 Skills</Typography>
+        <Stack direction='row'>
+          <SkillIconsSelect
+            title={title}
+            subtitle={subtitle}
+            onChangeTitle={onChangeTitle}
+            onChangeSubtitle={onChangeSubtitle}
+            setQuery={setQuery}
+          />
 
-        <SkillIconsPreview
-          skillIconsUrl={skillIconsUrl}
-          title={title}
-          subtitle={subtitle}
-        />
-      </SkillsLayout>
-      {/* TODO */}
-      {/* <Button variant='contained'>README 作成</Button> */}
-    </Fragment>
+          <SkillIconsPreview
+            skillIconsUrl={skillIconsUrl}
+            title={title}
+            subtitle={subtitle}
+          />
+        </Stack>
+        {/* TODO */}
+        {/* <Button variant='contained'>README 作成</Button> */}
+      </Paper>
+    </Box>
   )
 }
 
 export default Skills
-
-const SkillsLayout = styled(Stack)(() => ({
-  display: 'flex',
-  justifyContent: 'center',
-}))

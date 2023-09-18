@@ -11,7 +11,7 @@ const Stats = () => {
 
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center', m: 1 }}>
-      <Paper elevation={3} sx={{ width: '90%', height: '266px', px: 2, py: 3 }}>
+      <Paper elevation={3} sx={{ width: '90%', minHeight: '266px', p: 2 }}>
         <Typography variant='h4'>📈 Status</Typography>
         <Stack direction='row' sx={{ mt: 2 }}>
           <Box sx={{ minWidth: '20%' }}>
@@ -26,22 +26,27 @@ const Stats = () => {
             />
           </Box>
 
-          {userName && (
-            <Box sx={{ minWidth: '60%' }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={`https://github-readme-stats.vercel.app/api/top-langs?username=${userName}&show_icons=true&locale=en&layout=compact`}
-                height='150px'
-                alt={userName}
-              />
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={`https://github-readme-stats.vercel.app/api?username=${userName}&show_icons=true&locale=en`}
-                height='150px'
-                alt={userName}
-              />
-            </Box>
-          )}
+          <Paper
+            elevation={2}
+            sx={{ width: '60%', height: '200px', px: 2, py: 3 }}
+          >
+            {userName && (
+              <Box sx={{ minWidth: '60%' }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={`https://github-readme-stats.vercel.app/api/top-langs?username=${userName}&show_icons=true&locale=en&layout=compact`}
+                  height='150px'
+                  alt={userName}
+                />
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={`https://github-readme-stats.vercel.app/api?username=${userName}&show_icons=true&locale=en`}
+                  height='150px'
+                  alt={userName}
+                />
+              </Box>
+            )}
+          </Paper>
         </Stack>
       </Paper>
     </Box>

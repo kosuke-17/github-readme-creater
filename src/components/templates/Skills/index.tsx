@@ -41,14 +41,7 @@ const Skills = () => {
 
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center', m: 1 }}>
-      <Paper
-        elevation={3}
-        sx={{
-          width: '90%',
-          px: 2,
-          py: 3,
-        }}
-      >
+      <Paper elevation={3} sx={{ width: '90%', p: 2 }}>
         <Typography variant='h4'>🍃 Skills</Typography>
         <Stack direction='row'>
           <SkillIconsSelect

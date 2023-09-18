@@ -78,7 +78,7 @@ const SkillIconsSelect = (props: Props) => {
   ]
 
   return (
-    <Box sx={{ width: '50%', px: 2 }}>
+    <Box sx={{ width: '50%', pr: 1, mt: 2 }}>
       <Box sx={{ mb: 1 }}>
         <TextField
           label='Skills'

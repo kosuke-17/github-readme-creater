@@ -8,6 +8,7 @@ import Switch from '@mui/material/Switch'
 import Typography from '@mui/material/Typography'
 import { useState } from 'react'
 
+import CopyClipboard from '@/components/parts/CopyClipboard'
 import Divider from '@/components/parts/Divider'
 
 type Props = { skillIconsUrl: string; title?: string; subtitle?: string }
@@ -32,6 +33,10 @@ const SkillIconsPreview = ({ skillIconsUrl, title, subtitle }: Props) => {
         <FormControlLabel
           control={<Switch onChange={onShowCode} />}
           label='コードを見る'
+        />
+
+        <CopyClipboard
+          text={`# ${title}\n\n### ${subtitle}\n\n<img src="${skillIconsUrl}" />`}
         />
       </Stack>
       <Paper
